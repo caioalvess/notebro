@@ -1,0 +1,9 @@
+/* app global css */
+@font-face {
+  font-family: customfont;
+  src: url(./fonts//PressStart2P-Regular.ttf);
+}
+
+.my-font {
+  font-family: "customfont";
+}

@@ -14,16 +14,11 @@
         />
       </q-card-section>
 
-      <q-card-section class="q-pt-none"> oi </q-card-section>
+      <q-card-section class="q-pt-none">
+        <component :is="useModal.component" />
+      </q-card-section>
 
-      <q-card-actions
-        align="right"
-        class="text-primary"
-        style="position: absolute; bottom: 0; right: 0"
-      >
-        <q-btn flat label="Cancel" v-close-popup />
-        <q-btn flat label="Add address" v-close-popup />
-      </q-card-actions>
+      <slot name="action"> </slot>
     </q-card>
   </q-dialog>
 </template>
@@ -31,13 +26,16 @@
 <script>
 import { useModalStore } from "src/stores/modal-store";
 import { defineComponent } from "vue";
+import SignUp from "src/components/account/SignUp.vue";
 export default defineComponent({
+  components: { SignUp },
   name: "ModalComponent",
   setup() {
     const useModal = useModalStore();
 
     return {
       useModal,
+      SignUp,
     };
   },
 });

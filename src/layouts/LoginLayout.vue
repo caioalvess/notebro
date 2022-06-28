@@ -1,6 +1,17 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <Modal />
+    <Modal>
+      <template #action>
+        <q-card-actions
+          align="right"
+          class="text-primary"
+          style="position: absolute; bottom: 0; left: 13px"
+        >
+          Você já tem uma conta?
+          <span class="text-secondary"> Fazer login</span>
+        </q-card-actions>
+      </template>
+    </Modal>
     <q-page-container>
       <router-view />
     </q-page-container>

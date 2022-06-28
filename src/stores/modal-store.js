@@ -10,5 +10,9 @@ export const useModalStore = defineStore("modal", {
     activeModal(value) {
       this.active = value;
     },
+
+    setComponentModal(value) {
+      this.component = value;
+    },
   },
 });

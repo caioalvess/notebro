@@ -1,5 +1,5 @@
 <template>
-  <q-form class="row q-col-gutter-md" style="min-height: 500px">
+  <q-form class="row column q-col-gutter-md">
     <div class="col-12">
       <q-input label="Nome e sobrenome" />
     </div>
@@ -12,11 +12,18 @@
     <div class="col-12">
       <q-input label="Confirmar senha" hint="Insira a senha nova mais uma vez" />
     </div>
-    <div class="col-12 q-py-md" style="max-height: 44px">
-      <q-btn label="Continuar" outline size="lg" no-caps class="fit" />
+    <div class="col-12 q-pt-md q-pb-sm">
+      <q-btn
+        label="Continuar"
+        outline
+        size="lg"
+        no-caps
+        class="fit"
+        style="max-height: 44px"
+      />
     </div>
   </q-form>
-  <div class="col-12 text-body2 q-py-sm">
+  <div class="col-12 text-body2 q-pb-sm q-pt-none">
     <q-checkbox dense v-model="confirm" />
 
     Ao criar uma conta, você concorda com

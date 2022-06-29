@@ -4,7 +4,11 @@
       <template #action>
         <q-card-actions align="right" style="position: absolute; bottom: 0; left: 13px">
           <span class="text-primary">Você já tem uma conta?</span>
-          <span class="text-secondary q-ml-sm" style="text-decoration: underline">
+          <span
+            @click="backToLogin"
+            class="text-secondary q-ml-sm"
+            style="text-decoration: underline"
+          >
             Fazer login</span
           >
           <q-icon name="play_arrow" color="secondary" />
@@ -20,12 +24,20 @@
 <script>
 import { defineComponent } from "vue";
 import Modal from "src/components/global/Modal.vue";
+import { useModalStore } from "src/stores/modal-store";
 export default defineComponent({
   name: "LoginLayout",
   components: { Modal },
 
   setup() {
-    return {};
+    const useModal = useModalStore();
+    const backToLogin = () => {
+      useModal.activeModal(false);
+    };
+    return {
+      backToLogin,
+      useModal,
+    };
   },
 });
 </script>

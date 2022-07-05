@@ -28,15 +28,15 @@
 import { useModalStore } from "src/stores/modal-store";
 import { defineComponent } from "vue";
 import SignUp from "src/components/account/SignUp.vue";
+import ForgetPassword from "src/components/account/ForgetPassword.vue";
 export default defineComponent({
-  components: { SignUp },
+  components: { SignUp, ForgetPassword },
   name: "ModalComponent",
   setup() {
     const useModal = useModalStore();
 
     return {
       useModal,
-      SignUp,
     };
   },
 });

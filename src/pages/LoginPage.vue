@@ -64,6 +64,7 @@
             label="Esqueci a senha"
             class="col-6 text-center text-body1"
             style="text-decoration: underline"
+            @click="forgetPassword"
           />
         </div>
       </div>

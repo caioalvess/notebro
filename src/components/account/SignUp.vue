@@ -28,16 +28,6 @@
         style="max-height: 44px"
       />
     </div>
-    <div class="col-12 q-pt-md q-pb-sm">
-      <q-btn
-        label="Continuar"
-        outline
-        size="lg"
-        no-caps
-        class="fit"
-        style="max-height: 44px"
-      />
-    </div>
   </q-form>
   <div class="col-12 text-body2 q-pb-sm q-pt-none">
     <q-checkbox dense v-model="confirm" />

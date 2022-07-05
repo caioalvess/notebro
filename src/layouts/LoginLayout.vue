@@ -1,9 +1,10 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <Modal v-if="useModal.component === 'SignUp'">
+    <Modal v-if="useModal.component['name'] === 'SignUp'">
       <template #action>
         <q-card-actions
           align="right"
+          class="text-primary"
           style="position: absolute; bottom: 0; left: 13px"
         >
           Você já tem uma conta?

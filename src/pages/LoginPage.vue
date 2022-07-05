@@ -144,6 +144,7 @@ export default defineComponent({
       remember,
       hoverIn,
       createAccount,
+      forgetPassword,
     };
   },
 });

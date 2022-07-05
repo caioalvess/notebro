@@ -64,6 +64,7 @@
             label="Esqueci a senha"
             class="col-6 text-center text-body1"
             style="text-decoration: underline"
+            @click="forgetPassword"
           />
         </div>
       </div>
@@ -127,7 +128,15 @@ export default defineComponent({
 
     const createAccount = () => {
       useModal.activeModal(true);
-      useModal.setComponentModal("SignUp");
+      useModal.setComponentModal({ description: "" });
+    };
+
+    const forgetPassword = () => {
+      useModal.activeModal(true);
+      useModal.setComponentModal({
+        description: "Auxílio de senha",
+        name: "ForgetPassword",
+      });
     };
 
     const remember = ref(true);
@@ -143,6 +152,7 @@ export default defineComponent({
       remember,
       hoverIn,
       createAccount,
+      forgetPassword,
     };
   },
 });

@@ -1,8 +1,11 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <Modal>
+    <Modal v-if="useModal.component === 'SignUp'">
       <template #action>
-        <q-card-actions align="right" style="position: absolute; bottom: 0; left: 13px">
+        <q-card-actions
+          align="right"
+          style="position: absolute; bottom: 0; left: 13px"
+        >
           <span class="text-primary">Você já tem uma conta?</span>
           <span
             @click="backToLogin"
@@ -12,6 +15,16 @@
             Fazer login</span
           >
           <q-icon name="play_arrow" color="secondary" />
+        </q-card-actions>
+      </template>
+    </Modal>
+    <Modal v-else>
+      <template #action>
+        <q-card-actions
+          align="right"
+          style="position: absolute; bottom: 0; left: 13px"
+        >
+          oooi
         </q-card-actions>
       </template>
     </Modal>

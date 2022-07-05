@@ -3,16 +3,20 @@ import { defineStore } from "pinia";
 export const useModalStore = defineStore("modal", {
   state: () => ({
     active: false,
-    component: "",
+    component: {
+      description: "",
+      name: "",
+    },
   }),
 
   actions: {
-    activeModal(value) {
-      this.active = value;
-    },
-
     setComponentModal(value) {
-      this.component = value;
+      this.$patch({
+        component: {
+          description: value["description"],
+          name: value["name"],
+        },
+      });
     },
   },
 });

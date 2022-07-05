@@ -126,8 +126,8 @@ export default defineComponent({
     };
 
     const createAccount = () => {
-      useModal.activeModal(true);
-      useModal.setComponentModal("SignUp");
+      useModal.active = true;
+      useModal.setComponentModal({ description: "Cadastro", name: "SignUp" });
     };
 
     const remember = ref(true);

@@ -2,7 +2,7 @@
   <q-dialog v-model="useModal.active" maximized>
     <q-card style="min-width: 350px; position: relative">
       <q-card-section class="row items-center q-pb-none">
-        <div class="text-h6">Cadastro</div>
+        <div class="text-h6">{{ useModal.component["description"] }}</div>
         <q-space />
         <q-btn
           style="z-index: 999999"
@@ -11,7 +11,7 @@
           flat
           round
           dense
-          @click="useModal.active = false"
+          @click="useModal['active'] = false"
         />
       </q-card-section>
 

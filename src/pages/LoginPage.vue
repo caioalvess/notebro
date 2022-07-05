@@ -127,8 +127,16 @@ export default defineComponent({
     };
 
     const createAccount = () => {
-      useModal.active = true;
+      useModal["active"] = true;
       useModal.setComponentModal({ description: "Cadastro", name: "SignUp" });
+    };
+
+    const forgetPassword = () => {
+      useModal["active"] = true;
+      useModal.setComponentModal({
+        description: "Auxílio de senha",
+        name: "ForgetPassword",
+      });
     };
 
     const remember = ref(true);
@@ -144,6 +152,7 @@ export default defineComponent({
       remember,
       hoverIn,
       createAccount,
+      forgetPassword,
     };
   },
 });

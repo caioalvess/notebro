@@ -1,15 +1,34 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <Modal v-if="useModal.component['name'] === 'SignUp'">
+    <Modal>
       <template #action>
         <q-card-actions
+          v-if="useModal.component['name'] === 'SignUp'"
           align="right"
           class="text-primary"
           style="position: absolute; bottom: 0; left: 13px"
         >
           Você já tem uma conta?
-          <span @click="useModal.active = false" class="text-secondary q-pl-xs">
+          <span
+            @click="useModal['active'] = false"
+            class="text-secondary q-pl-xs"
+          >
             Fazer login</span
+          >
+          <q-icon name="play_arrow" color="secondary" />
+        </q-card-actions>
+        <q-card-actions
+          v-else
+          align="right"
+          class="text-primary"
+          style="position: absolute; bottom: 0; left: 13px"
+        >
+          Voltar para o
+          <span
+            @click="useModal['active'] = false"
+            class="text-secondary q-pl-xs"
+          >
+            Início</span
           >
           <q-icon name="play_arrow" color="secondary" />
         </q-card-actions>

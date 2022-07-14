@@ -6,7 +6,7 @@
           v-if="useModal.component['name'] === 'SignUp'"
           align="right"
           class="text-primary"
-          style="position: absolute; bottom: 0; left: 13px"
+          style="position: absolute; bottom: 0; left: 8px"
         >
           Você já tem uma conta?
           <span
@@ -21,7 +21,7 @@
           v-else
           align="right"
           class="text-primary"
-          style="position: absolute; bottom: 0; left: 13px"
+          style="position: absolute; bottom: 0; left: 15px"
         >
           Voltar para o
           <span

@@ -18,11 +18,23 @@ const routes = [
 
   {
     path: "/",
+    component: () => import("layouts/ResetPasswordLayout.vue"),
+    children: [
+      {
+        path: "reset-password",
+        name: "reset-password",
+        component: () => import("pages/ResetPassword.vue"),
+      },
+    ],
+  },
+
+  {
+    path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
-        path: "inicio",
-        name: "inicio",
+        path: "me",
+        name: "me",
         component: () => import("pages/IndexPage.vue"),
       },
     ],

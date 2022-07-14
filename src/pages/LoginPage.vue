@@ -14,14 +14,16 @@
             autofocus
             type="text"
             label="E-mail"
-            v-model="useAuth.userModel.email"
+            v-model="form.email"
+            :rules="[(val) => (val && val.length > 0) || 'Digite seu email']"
           />
         </div>
         <div class="col-11 q-py-sm">
           <q-input
             type="password"
             label="Senha"
-            v-model="useAuth.userModel.password"
+            v-model="form.password"
+            :rules="[(val) => (val && val.length > 0) || 'Digite a senha']"
           />
         </div>
 
@@ -34,12 +36,12 @@
             color="dark"
             class="col-12"
             size="lg"
-            type="submite"
+            type="submit"
           />
           <q-checkbox
             dense
             class="q-py-sm"
-            v-model="remember"
+            v-model="form.remember"
             label="Lembre-se de mim"
             color="orange"
           />
@@ -64,7 +66,7 @@
             label="Esqueci a senha"
             class="col-6 text-center text-body1"
             style="text-decoration: underline"
-            @click="forgetPassword"
+            @click="passwordRest"
           />
         </div>
       </div>
@@ -109,21 +111,25 @@
 </template>
 
 <script>
+import { defineComponent, ref } from "vue";
 import { useAuthStore } from "src/stores/auth-store";
 import { useModalStore } from "src/stores/modal-store";
-import { defineComponent, ref } from "vue";
-import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "LoginPage",
 
   setup() {
-    const $router = useRouter();
     const useAuth = useAuthStore();
     const useModal = useModalStore();
 
-    const handleLogin = async () => {
-      console.log("login");
+    const form = ref({
+      email: "",
+      password: "",
+      remember: false,
+    });
+
+    const handleLogin = () => {
+      useAuth.login(form.value);
     };
 
     const createAccount = () => {
@@ -131,28 +137,26 @@ export default defineComponent({
       useModal.setComponentModal({ description: "Cadastro", name: "SignUp" });
     };
 
-    const forgetPassword = () => {
+    const passwordRest = () => {
       useModal["active"] = true;
       useModal.setComponentModal({
         description: "Auxílio de senha",
-        name: "ForgetPassword",
+        name: "passwordRest",
       });
     };
-
-    const remember = ref(true);
 
     const hoverIn = () => {
       console.log("foi");
     };
 
     return {
+      handleLogin,
       useAuth,
       useModal,
-      handleLogin,
-      remember,
       hoverIn,
       createAccount,
-      forgetPassword,
+      passwordRest,
+      form,
     };
   },
 });

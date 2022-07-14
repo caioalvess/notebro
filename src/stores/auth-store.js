@@ -1,77 +1,118 @@
 import { defineStore } from "pinia";
 import useSupabase from "boot/supabase";
+import { useModalStore } from "src/stores/modal-store";
 
-const { supabase } = useSupabase;
-
-export const useAuthStore = defineStore("auth", {
+export const useAuthStore = defineStore("authStore", {
   state: () => ({
-    userModel: {
-      email: "",
-      password: "",
-    },
-
-    user: {},
-
-    provider: "",
-
-    loggedIn: false,
+    step: 1,
+    user: { name: "caio" },
   }),
 
   actions: {
-    async login() {
-      const { user, error } = await supabase.auth.signIn(
-        this.userModel.email,
-        this.userModel.password
-      );
+    async login({ email, password }) {
+      const { supabase } = useSupabase();
+      const { user, error } = await supabase.auth.signIn({ email, password });
 
-      if (error) throw error;
+      if (error) {
+        throw error.message;
+      }
+
+      this.router.replace({ name: "me" });
+
       return user;
     },
 
-    async loginProvider() {
-      const { user, error } = await supabase.auth.signIn(this.provider);
+    async loginWithSocialProvider(provider) {
+      const { supabase } = useSupabase();
+      const { user, error } = supabase.auth.signIn(provider);
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
+
       return user;
     },
 
     async logout() {
+      const { supabase } = useSupabase();
+      const useModal = useModalStore();
       const { error } = await supabase.auth.signOut();
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
+
+      useModal["active"] = false;
+      this.router.replace({ name: "login" });
     },
 
-    async loggedIn() {
-      return !!this.user;
+    async isLoggedIn() {
+      return !!user.value;
     },
 
-    async register({ ...meta }) {
+    async register({ email, password, ...meta }) {
+      const { supabase } = useSupabase();
       const { user, error } = await supabase.auth.signUp(
-        this.userModel.email,
-        this.userModel.password,
+        { email, password },
         {
           data: meta,
-          redirectTo: `${windows.location.origin}/me?fromEmail=registrationConfirmation`,
+          redirectTo: `${window.location.origin}/me?fromEmail=registrationConfirmation`,
         }
       );
-      if (error) throw error;
 
-      return user;
-    },
+      if (error) {
+        throw error;
+      }
 
-    async passwordRest(email) {
-      const { user, error } = await supabase.auth.resetPasswordForEmail(email);
+      this.step = 2;
 
-      if (error) throw error;
       return user;
     },
 
     async update(data) {
+      const { supabase } = useSupabase();
       const { user, error } = await supabase.auth.update(data);
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
 
       return user;
+    },
+
+    async sendPasswordRestEmail({ email }) {
+      const { supabase } = useSupabase();
+      const { user, error } = await supabase.auth.api.resetPasswordForEmail(
+        email
+      );
+
+      if (error) {
+        throw error;
+      }
+
+      return user;
+    },
+
+    async resetPassword(accessToken, newPassword) {
+      try {
+        const { supabase } = useSupabase();
+        const { user, error } = await supabase.auth.api.updateUser(
+          accessToken,
+          {
+            password: newPassword,
+          }
+        );
+
+        if (error) {
+          throw error.message;
+        }
+
+        this.router.push({ name: "loginDefault" });
+
+        return user;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 });

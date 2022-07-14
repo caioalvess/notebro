@@ -7,6 +7,7 @@ export const useModalStore = defineStore("modal", {
       description: "",
       name: "",
     },
+    maximized: true,
   }),
 
   actions: {

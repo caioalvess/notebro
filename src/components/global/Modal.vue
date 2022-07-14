@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="useModal.active" maximized>
+  <q-dialog v-model="useModal.active" :maximized="useModal.maximized">
     <q-card style="min-width: 350px; position: relative">
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6">{{ useModal.component["description"] }}</div>
@@ -28,9 +28,10 @@
 import { useModalStore } from "src/stores/modal-store";
 import { defineComponent } from "vue";
 import SignUp from "src/components/account/SignUp.vue";
-import ForgetPassword from "src/components/account/ForgetPassword.vue";
+import PasswordRest from "src/components/account/PasswordRest.vue";
+import Logout from "src/components/account/Logout.vue";
 export default defineComponent({
-  components: { SignUp, ForgetPassword },
+  components: { SignUp, PasswordRest, Logout },
   name: "ModalComponent",
   setup() {
     const useModal = useModalStore();
